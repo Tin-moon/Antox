@@ -4,7 +4,7 @@ import android.app.Activity
 import android.content.{Context, Intent}
 import android.preference.PreferenceManager
 import android.support.v4.content.IntentCompat
-import chat.tox.antox.activities.LoginActivity
+import chat.tox.antox.activities.{LoginActivity, LoginActivityJ}
 import chat.tox.antox.av.CallManager
 import chat.tox.antox.tox.{ToxDataFile, ToxService, ToxSingleton}
 import chat.tox.antox.toxme.{ToxData, ToxMe}
@@ -131,7 +131,7 @@ object State {
     activity.stopService(startTox)
     userDb(activity).logout()
 
-    val login = new Intent(activity, classOf[LoginActivity])
+    val login = new Intent(activity, classOf[LoginActivityJ])
     activity.startActivity(login)
     activity.finish()
   }
@@ -186,7 +186,7 @@ object State {
 
     val startTox = new Intent(activity, classOf[ToxService])
     activity.stopService(startTox)
-    val loginIntent = new Intent(activity, classOf[LoginActivity])
+    val loginIntent = new Intent(activity, classOf[LoginActivityJ])
     loginIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
       Intent.FLAG_ACTIVITY_CLEAR_TOP |
       IntentCompat.FLAG_ACTIVITY_CLEAR_TASK)

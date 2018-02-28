@@ -50,7 +50,7 @@ class EditCallRepliesActivity extends AppCompatActivity {
         val callReply = adapter.getItemAtPosition(position).asInstanceOf[CallReply]
 
         val callReplyDialogTag = "call_reply_dialog"
-        val editCallReplyDialog = EditCallReplyDialog.newInstance(callReply)
+        val editCallReplyDialog = EditCallReplyDialogJ.newInstance(callReply)
         editCallReplyDialog.show(thisActivity.getSupportFragmentManager, callReplyDialogTag)
       }
     })

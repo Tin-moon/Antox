@@ -6,7 +6,7 @@ import android.view.View
 import chat.tox.antox.R
 import chat.tox.antox.data.State
 import chat.tox.antox.tox.MessageHelper
-import chat.tox.antox.utils.Location
+import chat.tox.antox.utils.{Location, LocationJ}
 import chat.tox.antox.wrapper._
 import im.tox.tox4j.core.enums.ToxMessageType
 import rx.lang.scala.schedulers.{AndroidMainThreadScheduler, IOScheduler}
@@ -46,7 +46,7 @@ class GroupChatActivity extends GenericChatActivity[GroupKey] {
   def onClickVideoCallFriend(v: View): Unit = {}
 
   def onClickInfo(v: View): Unit = {
-    val profile = new Intent(this, classOf[GroupProfileActivity])
+    val profile = new Intent(this, classOf[GroupProfileActivityJ])
     profile.putExtra("key", activeKey.toString)
     startActivity(profile)
   }
@@ -63,15 +63,15 @@ class GroupChatActivity extends GenericChatActivity[GroupKey] {
     // not yet implemented in toxcore
   }
 
-  override def onClickInfo(clickLocation: Location): Unit = {
+  override def onClickInfo(clickLocation: LocationJ): Unit = {
     //TODO add a group profile activity
   }
 
-  override def onClickVideoCall(clickLocation: Location): Unit = {
+  override def onClickVideoCall(clickLocation: LocationJ): Unit = {
     // not yet implemented in toxav
   }
 
-  override def onClickVoiceCall(clickLocation: Location): Unit = {
+  override def onClickVoiceCall(clickLocation: LocationJ): Unit = {
     // not yet implemented in toxav
   }
 }

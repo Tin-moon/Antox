@@ -3,7 +3,7 @@ package chat.tox.antox.transfer
 import java.io._
 
 import chat.tox.antox.transfer.FileStatus.FileStatus
-import chat.tox.antox.utils.Constants
+import chat.tox.antox.utils.ConstantsJ
 import chat.tox.antox.wrapper.{ContactKey, FileKind}
 import org.apache.commons.imaging.formats.jpeg.exif.ExifRewriter
 
@@ -88,7 +88,7 @@ class FileTransfer(val key: ContactKey,
           try {
             val splitFileName = file.getName.split("\\.")
             val extension = splitFileName(splitFileName.length - 1)
-            val bInput = if (stripExifData && Constants.EXIF_FORMATS.contains(extension.toLowerCase)) {
+            val bInput = if (stripExifData && ConstantsJ.EXIF_FORMATS.contains(extension.toLowerCase)) {
               val bFile = new Array[Byte](file.length().toInt)
               input.read(bFile)
               val baos = new ByteArrayOutputStream()
@@ -141,7 +141,7 @@ class FileTransfer(val key: ContactKey,
           try {
             val splitFileName = file.getName.split("\\.")
             val extension = splitFileName(splitFileName.length - 1)
-            val bInput = if (stripExifData && Constants.EXIF_FORMATS.contains(extension.toLowerCase)) {
+            val bInput = if (stripExifData && ConstantsJ.EXIF_FORMATS.contains(extension.toLowerCase)) {
               val bFile = new Array[Byte](file.length().toInt)
               input.read(bFile)
               val baos = new ByteArrayOutputStream()

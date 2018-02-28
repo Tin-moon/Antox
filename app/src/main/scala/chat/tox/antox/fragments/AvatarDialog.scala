@@ -16,7 +16,7 @@ import android.view.View.OnClickListener
 import android.widget.{Button, ImageView, Toast}
 import chat.tox.antox.R
 import chat.tox.antox.data.State
-import chat.tox.antox.utils.{BitmapManager, Constants, FileUtils}
+import chat.tox.antox.utils.{BitmapManager, ConstantsJ, FileUtils}
 import chat.tox.antox.wrapper.BitmapUtils.RichBitmap
 import chat.tox.antox.wrapper.FileKind.AVATAR
 
@@ -30,7 +30,7 @@ class AvatarDialog(activity: Activity) {
       val name = preferences.getString("tox_id", "")
       val avatarFile = new File(AVATAR.getStorageDir(activity), name)
 
-      if (requestCode == Constants.IMAGE_RESULT) {
+      if (requestCode == ConstantsJ.IMAGE_RESULT) {
         val uri = data.getData
         val filePathColumn = Array(MediaStore.MediaColumns.DATA, MediaStore.MediaColumns.DISPLAY_NAME)
         val loader = new CursorLoader(activity, uri, filePathColumn, null, null, null)
@@ -79,12 +79,12 @@ class AvatarDialog(activity: Activity) {
     val MIN_DIMENSIONS = 16
 
     var currSize = MAX_DIMENSIONS
-    while (currSize >= MIN_DIMENSIONS && bitmap.getSizeInBytes > Constants.MAX_AVATAR_SIZE) {
+    while (currSize >= MIN_DIMENSIONS && bitmap.getSizeInBytes > ConstantsJ.MAX_AVATAR_SIZE) {
       bitmap = Bitmap.createScaledBitmap(bitmap, currSize, currSize, false)
       currSize /= 2
     }
 
-    if (bitmap.getSizeInBytes > Constants.MAX_AVATAR_SIZE) {
+    if (bitmap.getSizeInBytes > ConstantsJ.MAX_AVATAR_SIZE) {
       None
     } else {
       Some(bitmap)
@@ -119,7 +119,7 @@ class AvatarDialog(activity: Activity) {
           try {
             val file = new File(AVATAR.getStorageDir(activity), fileName)
             cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file))
-            activity.startActivityForResult(cameraIntent, Constants.PHOTO_RESULT)
+            activity.startActivityForResult(cameraIntent, ConstantsJ.PHOTO_RESULT)
           } catch {
             case e: IOException => e.printStackTrace()
           }
@@ -132,7 +132,7 @@ class AvatarDialog(activity: Activity) {
     fileButton.setOnClickListener(new OnClickListener {
       override def onClick(v: View): Unit = {
         val intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        activity.startActivityForResult(intent, Constants.IMAGE_RESULT)
+        activity.startActivityForResult(intent, ConstantsJ.IMAGE_RESULT)
       }
     })
 

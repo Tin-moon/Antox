@@ -8,7 +8,7 @@ import android.os.Environment
 import android.support.v7.widget.RecyclerView
 import android.view.{LayoutInflater, View, ViewGroup}
 import chat.tox.antox.R
-import chat.tox.antox.utils.{Constants, FileUtils, TimestampUtils}
+import chat.tox.antox.utils.{ConstantsJ, FileUtils, TimestampUtils}
 import chat.tox.antox.viewholders._
 import chat.tox.antox.wrapper.{Message, MessageType}
 
@@ -120,7 +120,7 @@ class ChatMessagesAdapter(context: Context, data: util.ArrayList[Message]) exten
               new File(msg.message)
             } else {
               val f = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
-                Constants.DOWNLOAD_DIRECTORY)
+                ConstantsJ.DOWNLOAD_DIRECTORY)
               new File(f.getAbsolutePath + "/" + msg.message)
             }
 

@@ -21,7 +21,7 @@ import rx.lang.scala.subscriptions.CompositeSubscription
 
 import scala.language.postfixOps
 
-class CallActivity extends FragmentActivity with CallReplySelectedListener {
+class CallActivity extends FragmentActivity with CallReplySelectedListenerJ {
 
   var call: Call = _
   var activeKey: ContactKey = _
@@ -60,7 +60,7 @@ class CallActivity extends FragmentActivity with CallReplySelectedListener {
         return
       })
 
-    if (getIntent.getAction == Constants.END_CALL) {
+    if (getIntent.getAction == ConstantsJ.END_CALL) {
       call.end()
       finish()
     }
@@ -76,7 +76,7 @@ class CallActivity extends FragmentActivity with CallReplySelectedListener {
           }
         }
 
-    val clickLocation = Option(getIntent.getExtras.get("click_location").asInstanceOf[Location])
+    val clickLocation = Option(getIntent.getExtras.get("click_location").asInstanceOf[LocationJ])
 
     rootLayout = findViewById(R.id.call_fragment_container).asInstanceOf[FrameLayout]
     if (savedInstanceState == null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -99,7 +99,7 @@ class CallActivity extends FragmentActivity with CallReplySelectedListener {
     registerSubscriptions()
   }
 
-  def circularRevealActivity(maybeClickLocation: Option[Location]): Unit = {
+  def circularRevealActivity(maybeClickLocation: Option[LocationJ]): Unit = {
     val cx = maybeClickLocation.map(_.x).getOrElse(rootLayout.getWidth / 2)
     val cy = maybeClickLocation.map(_.y).getOrElse(rootLayout.getHeight / 2)
 
@@ -155,7 +155,7 @@ class CallActivity extends FragmentActivity with CallReplySelectedListener {
         MessageHelper.sendMessage(this, activeKey.asInstanceOf[FriendKey], reply, ToxMessageType.NORMAL, None)
 
       case None =>
-        val intent = AntoxNotificationManager.createChatIntent(this, Constants.SWITCH_TO_FRIEND, classOf[ChatActivity], activeKey)
+        val intent = AntoxNotificationManager.createChatIntent(this, ConstantsJ.SWITCH_TO_FRIEND, classOf[ChatActivityJ], activeKey)
         startActivity(intent)
     }
 
@@ -165,7 +165,7 @@ class CallActivity extends FragmentActivity with CallReplySelectedListener {
 
   override def onNewIntent(intent: Intent): Unit = {
     super.onNewIntent(intent)
-    if (intent.getAction == Constants.END_CALL) {
+    if (intent.getAction == ConstantsJ.END_CALL) {
       call.end()
     }
   }

@@ -8,7 +8,7 @@ import android.preference.PreferenceManager
 import chat.tox.antox.Utils2
 import chat.tox.antox.data.State
 import chat.tox.antox.tox.{IntervalLevels, Intervals, ToxSingleton}
-import chat.tox.antox.utils.{AntoxLog, BitmapManager, Constants}
+import chat.tox.antox.utils.{AntoxLog, BitmapManager, ConstantsJ}
 import chat.tox.antox.wrapper.FileKind.AVATAR
 import chat.tox.antox.wrapper.{ContactKey, FileKind, FriendKey}
 import im.tox.tox4j.core.data.{ToxFileId, ToxFilename, ToxNickname}
@@ -96,7 +96,7 @@ class FileTransferManager extends Intervals {
     }
 
 
-    val length = if (stripExif && Constants.EXIF_FORMATS.contains(extension.toLowerCase)) {
+    val length = if (stripExif && ConstantsJ.EXIF_FORMATS.contains(extension.toLowerCase)) {
       val input = new FileInputStream(file)
       val bFile = new Array[Byte](file.length().toInt)
       input.read(bFile)

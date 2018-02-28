@@ -74,7 +74,7 @@ class FriendProfileActivity extends AppCompatActivity {
 
   override def onBackPressed() {
     super.onBackPressed()
-    val intent = new Intent(FriendProfileActivity.this, classOf[MainActivity])
+    val intent = new Intent(FriendProfileActivity.this, classOf[MainActivityJ])
     intent.addCategory(Intent.CATEGORY_HOME)
     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
     FriendProfileActivity.this.startActivity(intent)

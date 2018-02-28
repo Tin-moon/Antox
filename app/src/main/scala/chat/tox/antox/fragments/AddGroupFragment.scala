@@ -109,8 +109,8 @@ class AddGroupFragment extends Fragment with InputableID {
       // Attempt to use ID as a Group ID
       val result = checkAndSend(groupKeyView.getText.toString, originalUsername)
       if (result) {
-        val update = new Intent(Constants.BROADCAST_ACTION)
-        update.putExtra("action", Constants.UPDATE)
+        val update = new Intent(ConstantsJ.BROADCAST_ACTION)
+        update.putExtra("action", ConstantsJ.UPDATE)
         LocalBroadcastManager.getInstance(getActivity).sendBroadcast(update)
         val i = new Intent()
         getActivity.setResult(Activity.RESULT_OK, i)

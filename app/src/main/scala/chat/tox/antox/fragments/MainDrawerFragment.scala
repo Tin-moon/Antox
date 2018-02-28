@@ -11,8 +11,8 @@ import android.support.v4.widget.DrawerLayout
 import android.view.View.OnClickListener
 import android.view.{LayoutInflater, MenuItem, View, ViewGroup}
 import android.widget.{TextView, Toast}
+import chat.tox.antox.activities._
 import chat.tox.antox.R
-import chat.tox.antox.activities.{AboutActivity, ProfileSettingsActivity, SettingsActivity}
 import chat.tox.antox.callbacks.AntoxOnSelfConnectionStatusCallback
 import chat.tox.antox.data.State
 import chat.tox.antox.theme.ThemeManager
@@ -61,7 +61,7 @@ class MainDrawerFragment extends Fragment {
     if (drawerHeader != null) {
       drawerHeader.setOnClickListener(new OnClickListener {
         override def onClick(v: View): Unit = {
-          val intent = new Intent(getActivity, classOf[ProfileSettingsActivity])
+          val intent = new Intent(getActivity, classOf[ProfileSettingsActivityJ])
           startActivity(intent)
         }
       })
@@ -149,11 +149,11 @@ class MainDrawerFragment extends Fragment {
 
     id match {
       case R.id.nav_profile_options =>
-        val intent = new Intent(getActivity, classOf[ProfileSettingsActivity])
+        val intent = new Intent(getActivity, classOf[ProfileSettingsActivityJ])
         startActivity(intent)
 
       case R.id.nav_settings =>
-        val intent = new Intent(getActivity, classOf[SettingsActivity])
+        val intent = new Intent(getActivity, classOf[SettingsActivityJ])
         startActivity(intent)
 
       case R.id.nav_create_group =>
@@ -175,7 +175,8 @@ class MainDrawerFragment extends Fragment {
           .show()
 
       case R.id.nav_about =>
-        val intent = new Intent(getActivity, classOf[AboutActivity])
+        //val intent = new Intent(getActivity, classOf[AboutActivity])
+        val intent = new Intent(getActivity, classOf[AboutActivityJ])
         startActivity(intent)
 
       case R.id.nav_logout =>

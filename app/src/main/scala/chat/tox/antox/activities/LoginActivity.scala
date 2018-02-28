@@ -45,7 +45,7 @@ class LoginActivity extends AppCompatActivity with AdapterView.OnItemSelectedLis
     // if the user is starting the app for the first
     // time, go directly to the register account screen
     if (userDb.numUsers() == 0) {
-      val createAccount = new Intent(getApplicationContext, classOf[CreateAccountActivity])
+      val createAccount = new Intent(getApplicationContext, classOf[CreateAccountActivityJ])
       createAccount.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
         Intent.FLAG_ACTIVITY_CLEAR_TOP |
         IntentCompat.FLAG_ACTIVITY_CLEAR_TASK)
@@ -55,7 +55,7 @@ class LoginActivity extends AppCompatActivity with AdapterView.OnItemSelectedLis
       val startTox = new Intent(getApplicationContext, classOf[ToxService])
       getApplicationContext.startService(startTox)
 
-      val main = new Intent(getApplicationContext, classOf[MainActivity])
+      val main = new Intent(getApplicationContext, classOf[MainActivityJ])
       startActivity(main)
       finish()
     } else {
@@ -100,7 +100,7 @@ class LoginActivity extends AppCompatActivity with AdapterView.OnItemSelectedLis
         State.login(account, this)
         val startTox = new Intent(getApplicationContext, classOf[ToxService])
         getApplicationContext.startService(startTox)
-        val main = new Intent(getApplicationContext, classOf[MainActivity])
+        val main = new Intent(getApplicationContext, classOf[MainActivityJ])
         startActivity(main)
         finish()
       } else {
@@ -114,7 +114,7 @@ class LoginActivity extends AppCompatActivity with AdapterView.OnItemSelectedLis
   }
 
   def onClickCreateAccount(view: View) {
-    val createAccount = new Intent(getApplicationContext, classOf[CreateAccountActivity])
+    val createAccount = new Intent(getApplicationContext, classOf[CreateAccountActivityJ])
     startActivityForResult(createAccount, 1)
     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
   }

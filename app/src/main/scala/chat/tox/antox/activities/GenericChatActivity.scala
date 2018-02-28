@@ -20,7 +20,7 @@ import chat.tox.antox.data.State
 import chat.tox.antox.theme.ThemeManager
 import chat.tox.antox.utils.StringExtensions.RichString
 import chat.tox.antox.utils.ViewExtensions.RichView
-import chat.tox.antox.utils.{KeyboardOptions, AntoxLog, Constants, Location}
+import chat.tox.antox.utils._
 import chat.tox.antox.wrapper.{ContactKey, Message, MessageType}
 import im.tox.tox4j.core.enums.ToxMessageType
 import jp.wasabeef.recyclerview.animators.LandingAnimator
@@ -50,7 +50,7 @@ abstract class GenericChatActivity[KeyType <: ContactKey] extends AppCompatActiv
 
   var fromNotifications: Boolean = false
 
-  val MESSAGE_LENGTH_LIMIT = Constants.MAX_MESSAGE_LENGTH * 64
+  val MESSAGE_LENGTH_LIMIT = ConstantsJ.MAX_MESSAGE_LENGTH * 64
 
   val defaultMessagePageSize = 50
   var numMessagesShown = defaultMessagePageSize
@@ -81,8 +81,8 @@ abstract class GenericChatActivity[KeyType <: ContactKey] extends AppCompatActiv
 
     AntoxLog.debug("key = " + activeKey)
 
-    if (getIntent.getAction == Constants.START_CALL) {
-      onClickVoiceCall(Location.Origin)
+    if (getIntent.getAction == ConstantsJ.START_CALL) {
+      onClickVoiceCall(LocationJ.Origin())
       finish()
       return
     }
@@ -173,7 +173,7 @@ abstract class GenericChatActivity[KeyType <: ContactKey] extends AppCompatActiv
     super.onOptionsItemSelected(item)
 
     val maybeItemView = Option(toolbar.findViewById(item.getItemId))
-    val clickLocation = maybeItemView.map(_.getCenterLocationOnScreen()).getOrElse(Location.Origin)
+    val clickLocation = maybeItemView.map(_.getCenterLocationOnScreen()).getOrElse(LocationJ.Origin())
 
     item.getItemId match {
       case R.id.voice_call_button =>
@@ -286,7 +286,7 @@ abstract class GenericChatActivity[KeyType <: ContactKey] extends AppCompatActiv
 
   override def onBackPressed(): Unit = {
     if (fromNotifications) {
-      val main = new Intent(this, classOf[MainActivity])
+      val main = new Intent(this, classOf[MainActivityJ])
       main.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK)
       startActivity(main)
     } else {
@@ -301,9 +301,9 @@ abstract class GenericChatActivity[KeyType <: ContactKey] extends AppCompatActiv
 
   def setTyping(typing: Boolean): Unit
 
-  def onClickVoiceCall(clickLocation: Location): Unit
+  def onClickVoiceCall(clickLocation: LocationJ): Unit
 
-  def onClickVideoCall(clickLocation: Location): Unit
+  def onClickVideoCall(clickLocation: LocationJ): Unit
 
-  def onClickInfo(clickLocation: Location): Unit
+  def onClickInfo(clickLocation: LocationJ): Unit
 }

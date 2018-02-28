@@ -7,7 +7,7 @@ import android.view.View.OnClickListener
 import android.view.{LayoutInflater, View, ViewGroup}
 import android.widget.LinearLayout
 import chat.tox.antox.R
-import chat.tox.antox.activities.CallReplyDialog
+import chat.tox.antox.activities.{CallReplyDialog, CallReplyDialogJ}
 import chat.tox.antox.av.Call
 import chat.tox.antox.utils.AntoxLog
 import chat.tox.antox.wrapper.ContactKey
@@ -59,7 +59,7 @@ class IncomingCallFragment extends CommonCallFragment {
     replyButton.setOnClickListener(new OnClickListener {
       override def onClick(v: View): Unit = {
         val callReplyDialogTag = "call_reply_dialog"
-        new CallReplyDialog().show(getFragmentManager, callReplyDialogTag)
+        new CallReplyDialogJ().show(getFragmentManager, callReplyDialogTag)
       }
     })
 

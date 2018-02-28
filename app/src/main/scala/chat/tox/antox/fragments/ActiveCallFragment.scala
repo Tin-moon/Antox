@@ -11,10 +11,10 @@ import android.view.animation.Animation.AnimationListener
 import android.view.animation.{AccelerateInterpolator, AlphaAnimation, Animation}
 import android.widget.{Chronometer, FrameLayout, ImageView}
 import chat.tox.antox.R
-import chat.tox.antox.activities.ChatActivity
+import chat.tox.antox.activities.{ChatActivity, ChatActivityJ}
 import chat.tox.antox.av.CameraFacing.CameraFacing
 import chat.tox.antox.av._
-import chat.tox.antox.utils.{AntoxLog, Constants, Options, UiUtils}
+import chat.tox.antox.utils.{AntoxLog, ConstantsJ, Options, UiUtils}
 import chat.tox.antox.utils.ObservableExtensions.RichObservable
 import chat.tox.antox.wrapper.ContactKey
 import rx.lang.scala.Observable
@@ -138,8 +138,8 @@ class ActiveCallFragment extends CommonCallFragment {
     }
 
     setupOnClickToggle(returnToChat, () => {
-      val intent = new Intent(getActivity, classOf[ChatActivity])
-      intent.setAction(Constants.SWITCH_TO_FRIEND)
+      val intent = new Intent(getActivity, classOf[ChatActivityJ])
+      intent.setAction(ConstantsJ.SWITCH_TO_FRIEND)
       intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY) //stop chats from stacking up
       intent.putExtra("key", activeKey.toString)
       startActivity(intent)

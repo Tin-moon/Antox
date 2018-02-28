@@ -120,7 +120,7 @@ class ChatActivity extends GenericChatActivity[FriendKey] {
           val imageUri = Uri.fromFile(file)
           cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
           photoPath = Some(file.getAbsolutePath)
-          startActivityForResult(cameraIntent, Constants.PHOTO_RESULT)
+          startActivityForResult(cameraIntent, ConstantsJ.PHOTO_RESULT)
         } catch {
           case e: IOException => e.printStackTrace()
         }
@@ -137,7 +137,7 @@ class ChatActivity extends GenericChatActivity[FriendKey] {
         }
 
         val intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        startActivityForResult(intent, Constants.IMAGE_RESULT)
+        startActivityForResult(intent, ConstantsJ.IMAGE_RESULT)
       }
     })
   }
@@ -181,6 +181,7 @@ class ChatActivity extends GenericChatActivity[FriendKey] {
             activeCallBarClickable.setOnClickListener(new OnClickListener {
               override def onClick(v: View): Unit = {
                 startCallActivity(call, v.getCenterLocationOnScreen())
+                //startCallActivity(call, ViewExtensionsJ.getCenterLocationOnScreen(v))
               }
             })
             val chronometer = findViewById(R.id.call_bar_chronometer).asInstanceOf[Chronometer]
@@ -226,7 +227,7 @@ class ChatActivity extends GenericChatActivity[FriendKey] {
   override def onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
     super.onActivityResult(requestCode, resultCode, data)
     if (resultCode == Activity.RESULT_OK) {
-      if (requestCode == Constants.IMAGE_RESULT) {
+      if (requestCode == ConstantsJ.IMAGE_RESULT) {
         val uri = data.getData
         val filePathColumn = Array(MediaStore.MediaColumns.DATA, MediaStore.MediaColumns.DISPLAY_NAME)
         val loader = new CursorLoader(this, uri, filePathColumn, null, null, null)
@@ -245,7 +246,7 @@ class ChatActivity extends GenericChatActivity[FriendKey] {
           }
         }
       }
-      if (requestCode == Constants.PHOTO_RESULT) {
+      if (requestCode == ConstantsJ.PHOTO_RESULT) {
         photoPath.foreach(path => State.transfers.sendFileSendRequest(path, this.activeKey, FileKind.DATA, ToxFileId.empty, this))
         photoPath = None
       }
@@ -254,25 +255,25 @@ class ChatActivity extends GenericChatActivity[FriendKey] {
     }
   }
 
-  def startCallActivity(call: Call, clickLocation: Location): Unit = {
-    val callActivity = new Intent(this, classOf[CallActivity])
+  def startCallActivity(call: Call, clickLocation: LocationJ): Unit = {
+    val callActivity = new Intent(this, classOf[CallActivityJ])
     callActivity.putExtra("key", call.contactKey.toString)
     callActivity.putExtra("call_number", call.callNumber.value)
     callActivity.putExtra("click_location", clickLocation)
     startActivity(callActivity)
   }
 
-  override def onClickInfo(clickLocation: Location): Unit = {
-    val intent = new Intent(this, classOf[FriendProfileActivity])
+  override def onClickInfo(clickLocation: LocationJ): Unit = {
+    val intent = new Intent(this, classOf[FriendProfileActivityJ])
     val friendInfo = State.db.getFriendInfo(activeKey)
     intent.putExtra("key", activeKey.key)
-    intent.putExtra("avatar", friendInfo.avatar)
+    intent.putExtra("avatar", friendInfo.avatar.get)
 
     intent.putExtra("name", friendInfo.alias.getOrElse(friendInfo.name).toString())
     startActivity(intent)
   }
 
-  def onClickCall(video: Boolean, clickLocation: Location): Unit = {
+  def onClickCall(video: Boolean, clickLocation: LocationJ): Unit = {
     AntoxLog.debug("Calling friend")
     if (!State.db.getFriendInfo(activeKey).online) {
       AntoxLog.debug("Friend not online")
@@ -300,11 +301,11 @@ class ChatActivity extends GenericChatActivity[FriendKey] {
     }
   }
 
-  override def onClickVoiceCall(clickLocation: Location): Unit = {
+  override def onClickVoiceCall(clickLocation: LocationJ): Unit = {
     onClickCall(video = false, clickLocation)
   }
 
-  override def onClickVideoCall(clickLocation: Location): Unit = {
+  override def onClickVideoCall(clickLocation: LocationJ): Unit = {
     // don't send video if the device doesn't have a camera
     val sendingVideo = CameraUtils.deviceHasCamera(this)
 

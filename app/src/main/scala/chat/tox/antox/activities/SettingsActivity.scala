@@ -70,7 +70,7 @@ class SettingsActivity extends BetterPreferenceActivity with Preference.OnPrefer
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
           // it's a shame this can't be
           // used to recreate this activity and still change the theme
-          val i = new Intent(getApplicationContext, classOf[MainActivity])
+          val i = new Intent(getApplicationContext, classOf[MainActivityJ])
           i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
           finish()
           startActivity(i)
@@ -226,7 +226,7 @@ class SettingsActivity extends BetterPreferenceActivity with Preference.OnPrefer
     if (key == "locale") {
       AntoxLog.debug("Locale changed")
       AntoxLocalization.setLanguage(getApplicationContext)
-      val intent = new Intent(getApplicationContext, classOf[MainActivity])
+      val intent = new Intent(getApplicationContext, classOf[MainActivityJ])
       intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK |
       Intent.FLAG_ACTIVITY_CLEAR_TOP)
       startActivity(intent)
@@ -283,7 +283,7 @@ class SettingsActivity extends BetterPreferenceActivity with Preference.OnPrefer
   }
 
   def launchCallRepliesActivity(): Unit = {
-    val intent = new Intent(this, classOf[EditCallRepliesActivity])
+    val intent = new Intent(this, classOf[EditCallRepliesActivityJ])
     startActivity(intent)
   }
 }

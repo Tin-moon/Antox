@@ -73,7 +73,7 @@ class CreateAccountActivity extends AppCompatActivity {
     val toxmeHelpButton = findViewById(R.id.toxme_help_button).asInstanceOf[ImageView]
     toxmeHelpButton.setOnClickListener(new View.OnClickListener {
       override def onClick(v: View): Unit = {
-        val intent = new Intent(CreateAccountActivity.this, classOf[ToxMeInfoActivity])
+        val intent = new Intent(CreateAccountActivity.this, classOf[ToxMeInfoActivityJ])
         startActivity(intent)
       }
     })
@@ -137,7 +137,7 @@ class CreateAccountActivity extends AppCompatActivity {
     // Start the activity
     val startTox = new Intent(getApplicationContext, classOf[ToxService])
     getApplicationContext.startService(startTox)
-    val main = new Intent(getApplicationContext, classOf[MainActivity])
+    val main = new Intent(getApplicationContext, classOf[MainActivityJ])
     startActivity(main)
     setResult(Activity.RESULT_OK)
 

@@ -4,8 +4,8 @@ import android.app.{Notification, PendingIntent}
 import android.content.{Context, Intent}
 import android.support.v4.app.{NotificationCompat, TaskStackBuilder}
 import chat.tox.antox.R
-import chat.tox.antox.activities.{CallActivity, MainActivity}
-import chat.tox.antox.utils.{AntoxNotificationManager, Constants, NotificationOffsets}
+import chat.tox.antox.activities.{CallActivity, CallActivityJ, MainActivity, MainActivityJ}
+import chat.tox.antox.utils.{AntoxNotificationManager, ConstantsJ, NotificationOffsets}
 import chat.tox.antox.wrapper.ContactInfo
 
 class OngoingCallNotification(context: Context, contact: ContactInfo, call: Call) {
@@ -18,7 +18,7 @@ class OngoingCallNotification(context: Context, contact: ContactInfo, call: Call
     .setOngoing(true)
     .addAction(R.drawable.ic_call_end_white_24dp,
       context.getResources.getString(R.string.end_call),
-      createPendingIntent(Constants.END_CALL, classOf[CallActivity], addParentStack = false)) // end call intent for button press
+      createPendingIntent(ConstantsJ.END_CALL, classOf[CallActivityJ], addParentStack = false)) // end call intent for button press
     .setContentText(context.getResources.getString(R.string.call_ongoing))
     .setContentTitle(contact.getDisplayName)
     .setUsesChronometer(true) // call timer in top right corner
@@ -27,7 +27,7 @@ class OngoingCallNotification(context: Context, contact: ContactInfo, call: Call
 
   AntoxNotificationManager.addAvatarToNotification(builder, contact.key)
 
-  builder.setContentIntent(createPendingIntent(Constants.SWITCH_TO_CALL, classOf[CallActivity], addParentStack = true))
+  builder.setContentIntent(createPendingIntent(ConstantsJ.SWITCH_TO_CALL, classOf[CallActivityJ], addParentStack = true))
 
   def createPendingIntent(action: String, activity: Class[_], addParentStack: Boolean): PendingIntent = {
     val resultIntent = new Intent(context, activity)
@@ -38,7 +38,7 @@ class OngoingCallNotification(context: Context, contact: ContactInfo, call: Call
 
     if (addParentStack) {
       val stackBuilder = TaskStackBuilder.create(context)
-      stackBuilder.addParentStack(classOf[MainActivity])
+      stackBuilder.addParentStack(classOf[MainActivityJ])
       stackBuilder.addNextIntent(resultIntent)
       stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
     } else {

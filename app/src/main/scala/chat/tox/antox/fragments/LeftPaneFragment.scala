@@ -7,7 +7,7 @@ import android.view.ViewGroup.LayoutParams
 import android.view.{LayoutInflater, View, ViewGroup}
 import android.widget.{FrameLayout, ImageView, RelativeLayout}
 import chat.tox.antox.R
-import chat.tox.antox.activities.MainActivity
+import chat.tox.antox.activities.{MainActivity, MainActivityJ}
 import chat.tox.antox.data.State
 import chat.tox.antox.theme.ThemeManager
 import com.astuetz.PagerSlidingTabStrip
@@ -65,7 +65,7 @@ class LeftPaneFragment extends Fragment {
   }
 
   override def onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle): View = {
-    val thisActivity = this.getActivity.asInstanceOf[MainActivity]
+    val thisActivity = this.getActivity.asInstanceOf[MainActivityJ]
     val actionBar = thisActivity.getSupportActionBar
     ThemeManager.applyTheme(thisActivity, actionBar)
 

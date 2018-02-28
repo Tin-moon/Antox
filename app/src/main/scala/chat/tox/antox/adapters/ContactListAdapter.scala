@@ -133,7 +133,7 @@ class ContactListAdapter(private var context: Context) extends BaseAdapter with 
         holder.countText.setVisibility(View.VISIBLE)
         //limit unread counter to 99
         holder.countText.setText(java.lang.Integer.toString(
-          if (item.count > Constants.UNREAD_COUNT_LIMIT) Constants.UNREAD_COUNT_LIMIT else item.count))
+          if (item.count > ConstantsJ.UNREAD_COUNT_LIMIT) ConstantsJ.UNREAD_COUNT_LIMIT else item.count))
       } else {
         holder.countText.setVisibility(View.GONE)
       }

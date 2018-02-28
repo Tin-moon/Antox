@@ -26,7 +26,7 @@ class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState)
 
     preferences = PreferenceManager.getDefaultSharedPreferences(this)
-    ThemeManager.init(getApplicationContext)
+    //ThemeManager.init(getApplicationContext)
 
     // Set the right language
     AntoxLocalization.setLanguage(getApplicationContext)
@@ -79,8 +79,8 @@ class MainActivity extends AppCompatActivity {
 
 
   def onClickAdd(v: View) {
-    val intent = new Intent(this, classOf[AddActivity])
-    startActivityForResult(intent, Constants.ADD_FRIEND_REQUEST_CODE)
+    val intent = new Intent(this, classOf[AddActivityJ])
+    startActivityForResult(intent, ConstantsJ.ADD_FRIEND_REQUEST_CODE)
   }
 
   override def onBackPressed(): Unit = {

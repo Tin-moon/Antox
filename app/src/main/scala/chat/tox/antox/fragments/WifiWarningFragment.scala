@@ -8,7 +8,7 @@ import android.view.View.OnClickListener
 import android.view.{LayoutInflater, View, ViewGroup}
 import android.widget.Button
 import chat.tox.antox.R
-import chat.tox.antox.activities.SettingsActivity
+import chat.tox.antox.activities.{SettingsActivity, SettingsActivityJ}
 import chat.tox.antox.tox.ToxSingleton
 import chat.tox.antox.utils.{ConnectionManager, ConnectionTypeChangeListener}
 
@@ -66,7 +66,7 @@ class WifiWarningFragment extends Fragment {
     }
 
   def onClickWifiOnlyWarning(view: View): Unit = {
-    val intent = new Intent(getActivity, classOf[SettingsActivity])
+    val intent = new Intent(getActivity, classOf[SettingsActivityJ])
     startActivity(intent)
   }
 

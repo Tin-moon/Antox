@@ -3,7 +3,7 @@ package chat.tox.antox.callbacks
 import android.content.Context
 import chat.tox.antox.data.State
 import chat.tox.antox.tox.ToxSingleton
-import chat.tox.antox.utils.Constants
+import chat.tox.antox.utils.ConstantsJ
 import chat.tox.antox.wrapper.FileKind.AVATAR
 import chat.tox.antox.wrapper.{FileKind, FriendInfo}
 import im.tox.tox4j.core.data.ToxFilename
@@ -25,7 +25,7 @@ class AntoxOnFileRecvCallback(ctx: Context) {
       }
 
     if (kind == FileKind.AVATAR) {
-      if (fileSize > Constants.MAX_AVATAR_SIZE) {
+      if (fileSize > ConstantsJ.MAX_AVATAR_SIZE) {
         return
       } else if (fileSize == 0) {
         ToxSingleton.tox.fileControl(friendInfo.key, fileNumber, ToxFileControl.CANCEL)

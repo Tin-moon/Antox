@@ -14,7 +14,7 @@ import android.view.{LayoutInflater, View, ViewGroup}
 import android.widget.AdapterView.{OnItemClickListener, OnItemLongClickListener}
 import android.widget._
 import chat.tox.antox.R
-import chat.tox.antox.activities.{ChatActivity, FriendProfileActivity, GroupChatActivity}
+import chat.tox.antox.activities._
 import chat.tox.antox.adapters.ContactListAdapter
 import chat.tox.antox.av.Call
 import chat.tox.antox.data.{CallEventKind, State}
@@ -117,9 +117,9 @@ abstract class AbstractContactsFragment extends Fragment with OnItemClickListene
       val key = item.key
       ToxSingleton.changeActiveKey(key)
       val intent = if (`type` == ContactItemType.FRIEND) {
-        new Intent(getActivity, classOf[ChatActivity])
+        new Intent(getActivity, classOf[ChatActivityJ])
       } else {
-        new Intent(getActivity, classOf[GroupChatActivity])
+        new Intent(getActivity, classOf[GroupChatActivityJ])
       }
       intent.putExtra("key", key.toString)
       startActivity(intent)
@@ -161,9 +161,9 @@ abstract class AbstractContactsFragment extends Fragment with OnItemClickListene
                   val key = parentItem.key.asInstanceOf[FriendKey]
                   index match {
                     case 0 =>
-                      val profile = new Intent(getActivity, classOf[FriendProfileActivity])
+                      val profile = new Intent(getActivity, classOf[FriendProfileActivityJ])
                       profile.putExtra("key", key.toString)
-                      profile.putExtra("avatar", parentItem.image)
+                      profile.putExtra("avatar", parentItem.image.get)
                       profile.putExtra("name", parentItem.first)
                       startActivity(profile)
                     case 1 => showDeleteFriendDialog(getActivity, key)

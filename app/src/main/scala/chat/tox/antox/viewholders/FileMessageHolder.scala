@@ -12,7 +12,7 @@ import android.view.View.{OnClickListener, OnLongClickListener}
 import android.widget._
 import chat.tox.antox.R
 import chat.tox.antox.data.State
-import chat.tox.antox.utils.{AntoxLog, BitmapManager, Constants}
+import chat.tox.antox.utils.{AntoxLog, BitmapManager, ConstantsJ}
 import chat.tox.antox.wrapper.FriendKey
 import org.scaloid.common.LoggerTag
 import rx.lang.scala.schedulers.{AndroidMainThreadScheduler, IOScheduler}
@@ -205,7 +205,7 @@ class FileMessageHolder(val view: View) extends GenericMessageHolder(view) with 
                 new File(msg.message)
               } else {
                 val f = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
-                  Constants.DOWNLOAD_DIRECTORY)
+                  ConstantsJ.DOWNLOAD_DIRECTORY)
                 new File(f.getAbsolutePath + "/" + msg.message)
               }
             file.delete()

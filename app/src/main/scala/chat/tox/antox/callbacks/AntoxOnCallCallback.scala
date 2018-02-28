@@ -1,7 +1,7 @@
 package chat.tox.antox.callbacks
 
 import android.content.{Context, Intent}
-import chat.tox.antox.activities.CallActivity
+import chat.tox.antox.activities.{CallActivity, CallActivityJ}
 import chat.tox.antox.av.Call
 import chat.tox.antox.data.State
 import chat.tox.antox.tox.ToxSingleton
@@ -21,7 +21,7 @@ class AntoxOnCallCallback(private var ctx: Context) {
 
         new Thread(new Runnable {
           override def run(): Unit = {
-            val callActivity = new Intent(ctx, classOf[CallActivity])
+            val callActivity = new Intent(ctx, classOf[CallActivityJ])
 
             callActivity.putExtra("key", call.contactKey.toString)
             callActivity.putExtra("call_number", call.callNumber.value)

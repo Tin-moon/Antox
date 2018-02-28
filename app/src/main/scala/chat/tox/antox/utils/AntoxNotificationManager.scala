@@ -8,7 +8,7 @@ import android.support.v4.app.NotificationCompat.Builder
 import android.support.v4.app.{NotificationCompat, TaskStackBuilder}
 import android.util.Log
 import chat.tox.antox.R
-import chat.tox.antox.activities.MainActivity
+import chat.tox.antox.activities.{MainActivity, MainActivityJ}
 import chat.tox.antox.av.MissedCallNotification
 import chat.tox.antox.callbacks.AntoxOnSelfConnectionStatusCallback
 import chat.tox.antox.data.{AntoxDB, CallEventKind, State}
@@ -75,7 +75,7 @@ object AntoxNotificationManager {
         notificationBuilder.setContentInfo("")
       }
 
-      val resultPendingIntent: PendingIntent = createChatPendingIntent(ctx, Constants.SWITCH_TO_FRIEND, intentClass, contactInfo.key)
+      val resultPendingIntent: PendingIntent = createChatPendingIntent(ctx, ConstantsJ.SWITCH_TO_FRIEND, intentClass, contactInfo.key)
 
       notificationBuilder.setContentIntent(resultPendingIntent)
 
@@ -95,7 +95,7 @@ object AntoxNotificationManager {
 
   def createChatPendingIntent(ctx: Context, action: String, intentClass: Class[_], key: ToxKey): PendingIntent = {
     val stackBuilder = TaskStackBuilder.create(ctx)
-    stackBuilder.addParentStack(classOf[MainActivity])
+    stackBuilder.addParentStack(classOf[MainActivityJ])
     stackBuilder.addNextIntent(createChatIntent(ctx, action, intentClass, key))
     val resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
     resultPendingIntent
@@ -178,7 +178,7 @@ object AntoxNotificationManager {
 
       contentText.foreach(text => notificationBuilder.setContentText(text))
 
-      val resultIntent = new Intent(context, classOf[MainActivity])
+      val resultIntent = new Intent(context, classOf[MainActivityJ])
       resultIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP)
       val contentIntent = PendingIntent.getActivity(context, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT)
 
@@ -196,9 +196,9 @@ object AntoxNotificationManager {
     if (persistBuilder.isEmpty) {
       AntoxLog.debug("Creating persistent notification")
 
-      val resultIntent = new Intent(ctx, classOf[MainActivity])
+      val resultIntent = new Intent(ctx, classOf[MainActivityJ])
       val stackBuilder = TaskStackBuilder.create(ctx)
-      stackBuilder.addParentStack(classOf[MainActivity])
+      stackBuilder.addParentStack(classOf[MainActivityJ])
       stackBuilder.addNextIntent(resultIntent)
       val resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
 

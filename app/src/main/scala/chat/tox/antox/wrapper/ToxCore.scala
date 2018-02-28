@@ -190,7 +190,7 @@ class ToxCore(groupList: GroupList, options: ToxOptions) extends Intervals {
             successful = false
             attemptName = name + "_"
         }
-      } while (!successful && getGroupSelfName(groupKey).length < Constants.MAX_NAME_LENGTH)
+      } while (!successful && getGroupSelfName(groupKey).length < ConstantsJ.MAX_NAME_LENGTH)
 
       AntoxLog.debug("group name " + getGroupSelfName(groupKey))
     }

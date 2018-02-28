@@ -5,7 +5,7 @@ import java.io.File
 import android.content.Context
 import android.os.Environment
 import chat.tox.antox.utils.StorageType.StorageType
-import chat.tox.antox.utils.{Constants, FileUtils, StorageType}
+import chat.tox.antox.utils.{ConstantsJ, FileUtils, StorageType}
 
 trait Enum[A] {
 
@@ -52,7 +52,7 @@ object FileKind extends Enum[FileKind] {
   case object DATA extends FileKind {
     val kindId = 0
     val visible = true
-    val rawStorageDirectory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), Constants.DOWNLOAD_DIRECTORY).getPath
+    val rawStorageDirectory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), ConstantsJ.DOWNLOAD_DIRECTORY).getPath
 
     def storageType: StorageType = StorageType.EXTERNAL
 
@@ -64,7 +64,7 @@ object FileKind extends Enum[FileKind] {
     val kindId = 1
     val visible = false
     val rawStorageDirectory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-      + "/" + Constants.DOWNLOAD_DIRECTORY, Constants.AVATAR_DIRECTORY).getPath
+      + "/" + ConstantsJ.DOWNLOAD_DIRECTORY, ConstantsJ.AVATAR_DIRECTORY).getPath
     val storageType = StorageType.EXTERNAL
     val autoAccept = true
     val replaceExisting = true
